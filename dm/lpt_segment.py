@@ -35,8 +35,7 @@ def lpt_api(text, _format="plain", pattern="ws"):
             "pattern"   : pattern
     }
     r = requests.get(LPT_CLOUD, params=payload)
-    print r.url
-    print r.text
+    return r.text
     
 if __name__ == "__main__":
     token = "g2ywbY8k"
