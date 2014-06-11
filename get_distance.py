@@ -24,5 +24,6 @@ def get_distance(lat1, lng1, lat2, lng2):
     return int(round(s * 1000.0))
 
 if __name__ == "__main__":
-    print get_distance(31.2399, 121.5, 31.2320995330811, 121.472999572754)
-    print get_distance(39.97263, 116.3903, 39.89081, 116.39466)
+    #print get_distance(31.2399, 121.5, 31.2320995330811, 121.472999572754)
+    #print get_distance(39.97263, 116.3903, 39.89081, 116.39466)
+    print "hello"

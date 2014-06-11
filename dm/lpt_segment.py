@@ -27,16 +27,23 @@ import json
 APP_KEY     = "Y1N00192xdgVUmwioQcJyGUFZXvf8TMNljUtyRLg"
 LPT_CLOUD   = "http://api.ltp-cloud.com/analysis/"
 
-def lpt_api(text, _format="plain", pattern="ws"):
-    payload = {
-            "api_key"   : APP_KEY,
-            "text"      : text,
-            "format"    : _format,
-            "pattern"   : pattern
-    }
-    r = requests.get(LPT_CLOUD, params=payload)
-    return r.text
-    
+def lpt_api(text, _format="json", pattern="all"):
+    try:
+        payload = {
+                "api_key"   : APP_KEY,
+                "text"      : text,
+                "format"    : _format,
+                "pattern"   : pattern
+        }
+        r = requests.get(LPT_CLOUD, params=payload, timeout=5.4)
+        if _format == "json":
+            return r.json()
+        return r.text
+    except Exception,e:
+        pass
+    return ''
+
 if __name__ == "__main__":
     token = "g2ywbY8k"
-    lpt_api(text="我是中国人")
+    print "其实在路上会到一个叫和平的地方"
+    print lpt_api(text="其实在路上会到一个叫和平的地方", _format="plain", pattern="dp")
