@@ -36,3 +36,6 @@ nosetests.xml
 .pydevproject
 
 *log*
+search_svr/*
+poly/*
+dm/*

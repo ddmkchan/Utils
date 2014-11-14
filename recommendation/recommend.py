@@ -35,7 +35,6 @@ def recommend(username, users):
     """Give list of recommendations"""
     # first find nearest neighbor
     nearest = computeNearestNeighbor(username, users)[0][1]
-
     recommendations = []
     # now find bands neighbor rated that user didn't
     neighborRatings = users[nearest]

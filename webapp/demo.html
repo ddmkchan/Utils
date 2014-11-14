@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Hello, world</title>
+<style type="text/css">
+html { height:100% }
+body { height:100%; margin:0px; padding:0px }
+#container { height:100% }
+</style>
+<script type="text/javascript"
+src="http://webapi.amap.com/maps?v=2.0&key=7513c9815fc12afc35679bccdec79541">
+</script>
+<script type="text/javascript">
+function initialize(zid, rid) {
+var position; //  创建中心点坐标
+$.ajax({
+  url: "/restaurant",
+  data: {
+    rid: rid
+  },
+  success: function(rs) {
+    position = new AMap.LngLat(rs.lng, rs.lat); 
+    var mapObj = new AMap.Map("container",{center: position }); //  创建地图实例
+    var marker = new AMap.Marker({
+        map:mapObj,
+        //position: new AMap.LngLat(121.474952697754,31.2204208374023),
+        position: position,
+        icon: "http://webapi.amap.com/images/0.png"
+    });//  自定义构造 AMap.Marker 对象
+
+    var arr = new Array();//经纬度坐标数组
+
+    $.ajax({
+      url: "/gs_zone",
+      data: {
+        zid: 10968
+      },
+      success: function(result) {
+        $.each(result, function(i, latlng) {
+            arr.push(new AMap.LngLat(latlng.lng, latlng.lat));
+        });
+      }
+    });
+
+    //$.getJSON("/gs_zone?zid="+zid, function(data,status){
+    //    $.each(data, function(i, latlng) {
+    //        arr.push(new AMap.LngLat(latlng.lng, latlng.lat));
+    //    });
+    //});
+
+    var polygon=new AMap.Polygon({
+        map:mapObj,//要显示覆盖物的地图对象
+        path:arr,//多边形顶点经纬度数组
+        strokeColor:"#FF00FF",//线颜色
+        strokeOpacity:0.2,//线透明度
+        strokeWeight:3,  //线宽
+        fillColor: "#f5deb3",//填充色
+        fillOpacity: 0.35 //填充透明度
+        })
+  }
+});
+}
+
+</script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>  
+<body onload="initialize({{zone_id}}, {{restaurant_id}})">  
+<div id="container"></div>
+</body>
+</html>

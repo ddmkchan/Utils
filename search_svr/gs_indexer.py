@@ -19,7 +19,7 @@ class poi_seatch(object):
         self._type = "poi_type"
         self.conn = ES('127.0.0.1:9200', timeout=3.5)#连接ES
         #获取两个切换index名
-        self._alias = ['poi_index_2', 'poi_index_2']
+        self._alias = ['poi_index_1', 'poi_index_2']
         try:
             self.current_alias = self.conn.indices.get_alias(self._index)
         except Exception,e:
@@ -146,25 +146,25 @@ def get_data_from_file(filename):
     return rs
 
 def get_sight_data():
-    s = get_sale_sight()
+    #s = get_sale_sight()
     rs = []
     ret = dao.conn().execute("select s.SightId, s.DistrictId, s.Name, s.Alias, s.Lon, s.Lat, s.Address, Tel, isnull(d.districtpath, '') from dbo.sight s left join dbo.districtinfo d on s.DistrictId = d.DistrictId where s.publishstatus=6")
     for r in ret:
-        if int(r[0]) in s:
-            p_district_ids = re.split('\.', r[8])
-            rs.append({'id': int(r[0]),
-                        'district_id': int(r[1]),
-                        "district_path": " ".join([i for i in p_district_ids if len(i) > 0]),
-                        'name': r[2],
-                        'name2': r[2],
-                        "alias": r[3],
-                        "coords": {"lon":float(r[4]), "lat":float(r[5])},
-                        "address": r[6],
-                        "tel": r[7],
-                        })
+        p_district_ids = re.split('\.', r[8])
+        rs.append({'id': int(r[0]),
+                    'district_id': int(r[1]),
+                    "district_path": " ".join([i for i in p_district_ids if len(i) > 0]),
+                    'name': r[2],
+                    'name2': r[2],
+                    "alias": r[3],
+                    "coords": {"lon":float(r[4]), "lat":float(r[5])},
+                    "address": r[6],
+                    "tel": r[7],
+                    })
     return rs
 
 def get_sale_sight():
+    #在线销售POI
     import xlrd
     wb = xlrd.open_workbook("dp-0527.xlsx")
     sh = wb.sheets()[0]
@@ -172,7 +172,7 @@ def get_sale_sight():
     #print sh.row_values(i)[0]
 
 if __name__ == '__main__':
-    #print get_sight_data()
+    #print len(get_sight_data())
     poi = poi_seatch()
     poi.init_index()
     poi.rebuild_all()
