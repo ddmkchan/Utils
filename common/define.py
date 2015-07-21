@@ -7,9 +7,9 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 PTPQ_DB_HOST = '127.0.0.1'
 PTPQ_DB_PORT = '3306'
-PTPQ_DB_USER = 'debian-sys-maint'
-PTPQ_DB_PASS = 'oX0MpKvG5sKZMLsH'
-PTPQ_DB_NAME = 'test'
+PTPQ_DB_USER = 'root'
+PTPQ_DB_PASS = 'admin'
+PTPQ_DB_NAME = 'dataeye'
 
 PTPQ_ENGINE = create_engine(
     'mysql+mysqldb://%s:%s@%s:%s/%s?charset=utf8' % (

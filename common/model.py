@@ -224,3 +224,84 @@ class Teacher(Base):
     tid = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(Unicode(50), nullable=False, default=u'')
 
+class IQIYI_TV(Base):
+
+    __tablename__ = 'iqiyi_tv'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    tv_name = Column(String(50), nullable=False, default='')
+    episode	= Column(String(50), nullable=False, default='')
+    url = Column(String(200), nullable=False, default='')
+    tvid = Column(Integer, nullable=False, default=0)
+    qitanid = Column(Integer, nullable=False, default=0)
+
+
+class IQIYI_TV_COMMENTS(Base):
+
+    __tablename__ = 'iqiyi_tv_comments'
+
+    comment_id = Column(String(50), primary_key=True)
+    tv_name = Column(String(50), nullable=False, default='')
+    episode	= Column(String(50), nullable=False, default='')
+    comment = Column(Text, nullable=False, default='')
+    create_date = Column(DateTime,nullable=False,default=datetime.now())#创建时间
+    last_update = Column(DateTime,nullable=False,default=datetime.now())#最后更新时间
+
+
+
+class LETV_TV_COMMENTS(Base):
+
+    __tablename__ = 'letv_tv_comments'
+
+    comment_id = Column(String(50), primary_key=True)
+    tv_name = Column(String(50), nullable=False, default='')
+    episode	= Column(String(50), nullable=False, default='')
+    comment = Column(Text, nullable=False, default='')
+    create_date = Column(DateTime,nullable=False,default=datetime.now())#创建时间
+    last_update = Column(DateTime,nullable=False,default=datetime.now())#最后更新时间
+
+class APPLIST(Base):
+
+    __tablename__ = 'app_list'
+
+    apkmd5 = Column(String(50), primary_key=True, autoincrement=False)
+    app_name = Column(String(50), nullable=False, default=u'')
+    category = Column(String(50), nullable=False, default=u'')
+    campany_name = Column(String(100), nullable=False, default=u'')
+    editor_info = Column(String(200), nullable=False, default=u'')
+    source = Column(String(50), nullable=False, default=u'')
+    create_date = Column(DateTime,nullable=False,default=datetime.now())#创建时间
+    last_update = Column(DateTime,nullable=False,default=datetime.now())#最后更新时间
+
+class APPLIST2(Base):
+
+    __tablename__ = '360_list'
+
+    sid = Column(Integer, primary_key=True, autoincrement=False)
+    app_name = Column(String(50), nullable=False, default=u'')
+    tags = Column(String(200), nullable=False, default=u'')
+    category = Column(String(50), nullable=False, default=u'')
+    app_type = Column(Integer, nullable=False, default=0)
+    create_date = Column(DateTime,nullable=False,default=datetime.now())#创建时间
+    last_update = Column(DateTime,nullable=False,default=datetime.now())#最后更新时间
+
+class BAIKEENTRY(Base):
+
+    __tablename__ = 'baike_entry'
+
+    query = Column(Unicode(50), primary_key=True, autoincrement=False)
+    result = Column(Unicode(100), nullable=False, default=u'')
+    url = Column(Unicode(100), nullable=False, default=u'')
+    create_date = Column(DateTime,nullable=False,default=datetime.now())#创建时间
+    last_update = Column(DateTime,nullable=False,default=datetime.now())#最后更新时间
+
+
+class BAIKEDETAIL(Base):
+
+    __tablename__ = 'baike_detail'
+
+    query = Column(Unicode(50), primary_key=True, autoincrement=False)
+    detail = Column(UnicodeText, nullable=False, default=u'')
+    url = Column(Unicode(100), nullable=False, default=u'')
+    create_date = Column(DateTime,nullable=False,default=datetime.now())#创建时间
+    last_update = Column(DateTime,nullable=False,default=datetime.now())#最后更新时间
