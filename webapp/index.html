@@ -13,13 +13,9 @@ body { height:100%; margin:0px; padding:0px }
 src="http://webapi.amap.com/maps?v=2.0&key=7513c9815fc12afc35679bccdec79541">
 </script>
 <script type="text/javascript">
-function initialize(zid, rid) {
+function initialize(lat, lng) {
 var position; //  创建中心点坐标
-//var position = new AMap.LngLat(121.467, 31.2256); //  创建中心点坐标
-$.getJSON("/restaurant?rid="+rid, function(data, status){
-    position = new AMap.LngLat(120.087684631348, 30.2060813903809); 
-    //position = new AMap.LngLat(121.44625734962726,31.223547328687516); 
-    //position = new AMap.LngLat(data.lng, data.lat); 
+    position = new AMap.LngLat(lng, lat); 
     var mapObj = new AMap.Map("container",{center: position }); //  创建地图实例
     //return position;
     var marker = new AMap.Marker({
@@ -30,41 +26,6 @@ $.getJSON("/restaurant?rid="+rid, function(data, status){
         icon: "http://webapi.amap.com/images/0.png"
     });//  自定义构造 AMap.Marker 对象
 
-    //var arr = new Array();//经纬度坐标数组
-    //arr.push(new AMap.LngLat(109.5600529, 18.28481589)); 
-    //arr.push(new AMap.LngLat(109.541759,18.29724436));   
-    //arr.push(new AMap.LngLat(109.5154615, 18.29281946)); 
-    //arr.push(new AMap.LngLat(109.5024128, 18.266522)); 
-
-
-    //var polygon=new AMap.Polygon({
-    //    map:mapObj,//要显示覆盖物的地图对象
-    //    path:arr,//多边形顶点经纬度数组
-    //    strokeColor:"A000FF",//线颜色
-    //    strokeOpacity:0.2,//线透明度
-    //    strokeWeight:3,  //线宽
-    //    fillColor: "#f5deb3",//填充色
-    //    fillOpacity: 0.35 //填充透明度
-    //    })
-
-    var arr = new Array();//经纬度坐标数组
-    $.getJSON("/gs_zone?zid="+zid, function(data,status){
-        $.each(data, function(i, latlng) {
-            arr.push(new AMap.LngLat(latlng.lng, latlng.lat));
-        });
-        var polygon=new AMap.Polygon({
-            map:mapObj,//要显示覆盖物的地图对象
-            path:arr,//多边形顶点经纬度数组
-            strokeColor:"A000FF",//线颜色
-            strokeOpacity:0.2,//线透明度
-            strokeWeight:3,  //线宽
-            fillColor: "#f5deb3",//填充色
-            fillOpacity: 0.35 //填充透明度
-            })
-    });
-
-});
-
 }
 
 </script>
@@ -72,7 +33,7 @@ $.getJSON("/restaurant?rid="+rid, function(data, status){
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>  
-<body onload="initialize({{zone_id}}, {{restaurant_id}})">  
+<body onload="initialize({{lat}}, {{lng}})">  
 <div id="container"></div>
 </body>
 </html>

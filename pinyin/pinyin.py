@@ -74,7 +74,7 @@ def Cartesian_product(_list):
 if __name__ == "__main__":
     test = PinYin()
     test.load_word()
-    string = "hello 重启(重庆店)"
+    string = "重启(重庆店)"
     print "in: %s" % string
     print test.hanzi2pinyin(string=string)
-    print Cartesian_product(test.hanzi2pinyin(string=string))
+    #print Cartesian_product(test.hanzi2pinyin(string=string))
