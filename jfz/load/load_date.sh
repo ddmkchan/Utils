@@ -8,13 +8,13 @@ then
     table_name=$1
     date_curr=$2
     date_end=$2
-    mysql_comm="mysql -h192.168.20.89 -ujfz_data -pjfzData!1 -Djfz_result --default-character-set=utf8"
+    mysql_comm=""
 elif [ $# == 3 ]
 then
     table_name=$1
     date_curr=$2
     date_end=$3
-    mysql_comm="mysql -h192.168.20.89 -ujfz_data -pjfzData!1 -Djfz_result --default-character-set=utf8"
+    mysql_comm=""
 else
 	echo "Usage: $0 tablename yyyymmdd or $0 tablename yyyymmdd yyyymmdd"
 	exit
