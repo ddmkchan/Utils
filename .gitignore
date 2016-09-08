@@ -38,4 +38,3 @@ nosetests.xml
 *log*
 search_svr/*
 poly/*
-dm/*
